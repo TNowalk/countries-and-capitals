@@ -1,0 +1,25 @@
+<div class="table-wrapper">
+  <table class="table table-hover table-condensed table-responsive">
+    <thead>
+      <tr>
+        <th ng-repeat="col in countrieslistctrl.cols" ng-click="countrieslistctrl.setOrder(col)">
+          {{col.title}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="country in countrieslistctrl.countries | orderBy : countrieslistctrl.orderBy || countrieslistctrl.cols[0].value : countrieslistctrl.reverseOrder" ng-click="countrieslistctrl.showCountry(country)">
+        <td ng-repeat="col in countrieslistctrl.cols">
+          <span ng-if="countrieslistctrl.isNumber(country[col.value])">{{country[col.value] | number: 0}}</span>
+          <span ng-if="!countrieslistctrl.isNumber(country[col.value])">{{country[col.value]}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<div class="text-center">
+  <a href="/">
+    <div class="btn btn-primary">Home</div>
+  </a>
+</div>

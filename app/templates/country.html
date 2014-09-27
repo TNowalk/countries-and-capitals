@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <div class="form-horizontal">
+      <h1 class="text-center">{{countryctrl.country.countryName}}</h1>
+      <br>
+      <div class="form-group">
+        <label class="col-xs-6 control-label">Population of Country:</label>
+        <div class="col-xs-6">
+          <p class="control-value">{{countryctrl.country.population | number : 0}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-6 control-label">Area:</label>
+        <div class="col-xs-6">
+          <p class="control-value">{{countryctrl.country.areaInSqKm | number : 0}} square km</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-6 control-label">Capital:</label>
+        <div class="col-xs-6">
+          <p class="control-value">{{countryctrl.country.capital}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-6 control-label">Population of Capital:</label>
+        <div class="col-xs-6">
+          <p class="control-value">{{countryctrl.capital.population | number : 0}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-6 control-label">Continent:</label>
+        <div class="col-xs-6">
+          <p class="control-value">{{countryctrl.country.continentName}}</p>
+        </div>
+      </div>
+      <div class="form-group" ng-show="countryctrl.country.timezone.timezoneId">
+        <label class="col-xs-6 control-label">Time Zone:</label>
+        <div class="col-xs-6">
+          <p class="control-value">{{countryctrl.country.timezone.timezoneId}}</p>
+        </div>
+      </div>
+      <div class="form-group" ng-show="countryctrl.country.neighbours">
+        <label class="col-xs-6 control-label">{{countryctrl.country.neighbours.totalResultsCount}} Neighbors:</label>
+        <div class="col-xs-6">
+          <p class="control-value">
+            <span ng-repeat="country in countryctrl.country.neighbours.geonames">
+              <a ng-href="#/countries/{{country.countryCode}}">{{country.countryName}}</a>{{!$last && ', ' || ''}}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="col-xs-6">
+      <img id="map-img" ng-src="http://www.geonames.org/img/country/250/{{countryctrl.country.countryCode.toUpperCase()}}.png"/>
+    </div>
+    <div class="col-xs-6">
+      <img id="flag-img" ng-src="http://www.geonames.org/flags/x/{{countryctrl.country.countryCode.toLowerCase()}}.gif"/>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="text-center">
+    <a href="/">
+      <div class="btn btn-primary">Home</div>
+    </a>
+    <a href="#/countries">
+      <div class="btn btn-primary">Browse Countries</div>
+    </a>
+  </div>
+</div>
+<br>

@@ -1,0 +1,19 @@
+.table-wrapper
+{  
+    height: 400px !important;
+    overflow-y: auto;
+}​
+
+#map-img{
+  max-width: 200px;
+  max-height: 100px;
+}
+
+#flag-img{
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.control-value{
+  padding-top: 7px;
+}
