@@ -22,7 +22,32 @@
     })
     .when('/countries', {
       templateUrl: './templates/countries-list.html',
-      controller : 'CountriesListCtrl as countrieslistctrl'
+      controller : 'CountriesListCtrl as countrieslistctrl',
+      resolve: {
+        countries: function(countryInfoService, utilityService, $q){
+          var def = $q.defer();
+          countryInfoService.getAllCountries().then(
+            function(data){
+              var countries = data.geonames;
+              // map the countries and convert all the number strings into floats
+              countries = _.map(countries, function(country){
+                return _.each(country, function(val, key, obj){
+                  if(utilityService.isNumber(val)){
+                    obj[key] = parseFloat(val);
+                  }else{
+                    obj[key] = val;
+                  }
+                });
+              });
+              def.resolve(countries);
+            },
+            function(error){
+              def.reject(error);
+            }
+          );
+          return def.promise;
+        }
+      }
     })
     .when('/countries/:country', {
       templateUrl: './templates/country.html',

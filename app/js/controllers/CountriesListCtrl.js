@@ -1,9 +1,9 @@
 (function(){
   angular.module('myApp').controller('CountriesListCtrl', CountriesListCtrl);
 
-  CountriesListCtrl.$inject = ['$log', 'countryInfoService', 'utilityService'];
+  CountriesListCtrl.$inject = ['$log', 'countryInfoService', 'utilityService', 'countries'];
 
-  function CountriesListCtrl($log, countryInfoService, utilityService){
+  function CountriesListCtrl($log, countryInfoService, utilityService, countries){
     var vm = this;
     vm.cols = [
       {title: 'Name', value: 'countryName'}, 
@@ -12,39 +12,9 @@
       {title: 'Population', value: 'population'}, 
       {title: 'Continent', value: 'continentName'}
     ];
-    vm.getAllCountries = getAllCountries;
-    vm.isNumber = isNumber;
+    vm.countries = countries;
     vm.setOrder = setOrder;
     vm.showCountry = showCountry;
-
-    vm.getAllCountries();
-
-    function getAllCountries(){
-      countryInfoService.getAllCountries().then(
-        function(data){
-          $log.log(data);
-          vm.countries = data.geonames;
-          // map the countries and convert all the number strings into floats
-          vm.countries = _.map(vm.countries, function(country){
-            return _.each(country, function(val, key, obj){
-              if(isNumber(val)){
-                obj[key] = parseFloat(val);
-              }else{
-                obj[key] = val;
-              }
-            });
-          });
-          $log.log(vm.countries);
-        },
-        function(error){
-          $log.log(error);
-        }
-      );
-    }
-
-    function isNumber(arg){
-      return utilityService.isNumber(arg);
-    }
 
     function setOrder(col){
       if(vm.orderBy && vm.orderBy === col.value){
