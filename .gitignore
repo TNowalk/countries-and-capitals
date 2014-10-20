@@ -19,3 +19,9 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+node_modules
+dist
+.tmp
+.sass-cache
+app/bower_components
