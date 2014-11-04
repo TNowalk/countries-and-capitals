@@ -19,6 +19,7 @@ module.exports = function(config) {
         './app/bower_components/angular-animate/angular-animate.js',
         './app/bower_components/angular-route/angular-route.js',
         './app/bower_components/angular-mocks/angular-mocks.js',
+        './app/bower_components/underscore/underscore.js',
         './app/js/myApp.js',
         './app/js/*.js',
         './app/js/**/*.js',
@@ -34,8 +35,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        '.app/js/*.js' : 'coverage',
-        '.app/js/**/*.js' : 'coverage'
+        'app/js/**/*.js' : 'coverage'
     },
 
 

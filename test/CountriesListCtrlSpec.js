@@ -31,4 +31,21 @@ describe("Controller: CountiresListCtrl", function(){
   it("should resolve countries", function(){
     expect(CountriesListController.countries).toBe(countries);
   });
+
+  it("should order the list by the column, or reverse the order if column already selected", function() {
+    CountriesListController.setOrder({value: 'blue'});
+    expect(CountriesListController.orderBy).toBe('blue');
+    expect(CountriesListController.reverseOrder).toBeFalsy();
+    CountriesListController.setOrder({value: 'red'});
+    expect(CountriesListController.orderBy).toBe('red');
+    expect(CountriesListController.reverseOrder).toBeFalsy();
+    CountriesListController.setOrder({value: 'red'});
+    expect(CountriesListController.orderBy).toBe('red');
+    expect(CountriesListController.reverseOrder).toBeTruthy();
+  });
+
+  it("should reroute to the specified country", function() {
+    // how to do this?!
+    
+  });
 });
