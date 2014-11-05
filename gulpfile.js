@@ -28,15 +28,13 @@ gulp.task('jshint-dist', function(){
 });
 
 gulp.task('minify-css-js', function(){
-  var assets = $.useref.assets();
-
   var opts = {comments: true, empty: true, spare: true};
 
   gulp.src('./app/*.html')
     .pipe($.usemin({
-      css: [minifyCss(), 'concat'],
-      html: [minifyHtml(opts)],
-      js: [uglify(), rev()]
+      css: [$.minifyCss(), 'concat'],
+      html: [$.minifyHtml(opts)],
+      js: [$.uglify()]
     }))
     .pipe(gulp.dest('dist/'));
 });
