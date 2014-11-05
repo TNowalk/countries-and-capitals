@@ -43,15 +43,15 @@ describe("Controller: CountryCtrl", function(){
     httpBackend.verifyNoOutstandingExpectation();
   });
 
-  it("instantiates the controller", function() {
+  it("should instantiate the controller", function() {
     expect(CountryCtrl).toBeDefined();
   });
 
-  it("resolves a country", function() {
+  it("should resolve a country", function() {
     expect(CountryCtrl.country).toBe(country);
   });
 
-  it("activates the controller by getting the capital, neighbors, and timeone", function() {
+  it("should activate the controller by getting the capital, neighbors, and timeone", function() {
     // how to do this?!
   });
 });

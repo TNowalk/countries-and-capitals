@@ -45,7 +45,8 @@ describe("Controller: CountiresListCtrl", function(){
   });
 
   it("should reroute to the specified country", function() {
+    CountriesListController.showCountry();
     // how to do this?!
-    
+
   });
 });
