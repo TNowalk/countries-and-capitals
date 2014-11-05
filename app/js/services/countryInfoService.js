@@ -33,7 +33,6 @@
     function getAllCountries(){
       var defer = $q.defer();
       if(allCountries){
-        $log.log("cached");
         defer.resolve(allCountries);
       }else{
         geoRequest(GEO_COUNTRY_PATH).then(

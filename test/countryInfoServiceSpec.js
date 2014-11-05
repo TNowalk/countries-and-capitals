@@ -19,7 +19,7 @@ describe('Service: countryInfoService', function(){
   describe('getAllCountries', function(){
     it('should request and return a list of countries, or return cached results', function() {
       var fakeCountries = ['test1', 'test2'];
-      var results;
+      var results, newResults;
       var errors;
 
       httpBackend.expect('GET', 'http://api.geonames.org/countryInfoJSON?username=srtucker22').respond(fakeCountries);
@@ -31,6 +31,16 @@ describe('Service: countryInfoService', function(){
       httpBackend.flush();
 
       expect(results).toEqual(fakeCountries);
+
+      countryInfo.getAllCountries().then(function(countries){
+        newResults = countries;
+      }, function(error){
+        errors = error;
+      });
+
+      expect(errors).not.toBeDefined();
+      
+      expect(newResults).toEqual(fakeCountries);
     });
   });
 

@@ -18,11 +18,13 @@
   .config(function($routeProvider) {
     $routeProvider.when('/', {
       templateUrl : './templates/home.html',
-      controller : 'HomeCtrl as homectrl'
+      controller : 'HomeCtrl',
+      controllerAs : 'homectrl'
     })
     .when('/countries', {
       templateUrl: './templates/countries-list.html',
-      controller : 'CountriesListCtrl as countrieslistctrl',
+      controller : 'CountriesListCtrl',
+      controllerAs :  'countrieslistctrl',
       resolve: {
         countries: function(countryInfoService, utilityService, $q){
           var def = $q.defer();
@@ -51,7 +53,8 @@
     })
     .when('/countries/:country', {
       templateUrl: './templates/country.html',
-      controller: 'CountryCtrl as countryctrl',
+      controller: 'CountryCtrl',
+      controllerAs : 'countryctrl',
       resolve: {
         country: function($route, $location, $log, countryInfoService){
           var country = $route.current.params.country;
