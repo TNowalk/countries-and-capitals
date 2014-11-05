@@ -1,42 +1,53 @@
 //inside of gulpfile.js
-var gulp = require('gulp'); 
-var connect = require('gulp-connect');
-var uglify = require('gulp-uglify');
-var minifyHtml = require('gulp-minify-html');
-var minifyCss = require('gulp-minify-css');
-var usemin = require('gulp-usemin');
-var rev = require('gulp-rev');
-var clean = require('gulp-clean');
-
-var autoprefixer = require('gulp-autoprefixer');
-var jshint = require('gulp-jshint');
-var rename = require('gulp-rename');
-var concat = require('gulp-concat');
-var notify = require('gulp-notify');
-var cache = require('gulp-cache');
-var livereload = require('gulp-livereload');
-var del = require('del');
-
-gulp.task('connect', function() {
-  connect.server({
-    root: 'app/'
+var gulp = require('gulp');
+var $ = require('gulp-load-plugins')(
+  {
+    camelize: true
   });
+
+gulp.task('minify-views', function() {
+  var opts = {comments: true, empty: true, spare: true};
+
+  gulp.src('./app/tempates/*.html')
+    .pipe($.minifyHtml(opts))
+    .pipe(gulp.dest('dist/tempates/'));
 });
 
-gulp.task('copy-html-files', function() {
-     gulp.src(['./app/**/*.html', '!./app/index.html'], {base: './app'})
-    .pipe(gulp.dest('build/'));
+function jshint(src){
+  gulp.src(src)
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('default'));
+}
+
+gulp.task('jshint-source', function() {
+  jshint(['./app/js/*.js', './app/js/**/*.js']);
 });
 
-gulp.task('usemin', function() {
-  gulp.src('./app/index.html')
-    .pipe(usemin({
-      css: [minifyCss(), 'concat', rev()],
+gulp.task('jshint-dist', function(){
+  jshint('./dist/js/*.js');
+});
+
+gulp.task('minify-css-js', function(){
+  var assets = $.useref.assets();
+
+  var opts = {comments: true, empty: true, spare: true};
+
+  gulp.src('./app/*.html')
+    .pipe($.usemin({
+      css: [minifyCss(), 'concat'],
+      html: [minifyHtml(opts)],
       js: [uglify(), rev()]
     }))
-    .pipe(gulp.dest('build/'));
+    .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('watch', function() {
+  gulp.watch(['app/*.html', 
+              'app/tempalates/*.html',
+              'app/css/*.css', 
+              'app/js/*.js',
+              'app/js/**/*.js'], ['jshint-source', 'minify-views', 'minify-css-js', 'jshint-dist']);
 });
 
 // Default Task
-gulp.task('default', ['connect']);
-gulp.task('build', ['copy-html-files', 'usemin']);
+gulp.task('default', ['watch']);
