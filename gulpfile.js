@@ -86,7 +86,7 @@ gulp.task('styles', function() {
 gulp.task('vendor-styles', function() {
   var opts = {comments:true,spare:true}; 
 
-  gulp.src(['app/bower_components/**/*.css'])
+  gulp.src(['app/bower_components/**/*.css', '!app/bower_components/**/*.min.css'])
     .pipe($.sourcemaps.init())
     .pipe($.concat('vendor.css'))
     .pipe($.sourcemaps.write())
