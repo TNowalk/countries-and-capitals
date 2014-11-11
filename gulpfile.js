@@ -101,7 +101,7 @@ gulp.task('vendor-styles', function() {
 
 gulp.task('vendor-scripts', function() {
 
-  gulp.src(['app/bower_components/**/*.js'])
+  gulp.src(['app/bower_components/**/*.js', '!app/bower_components/**/*.min.js'])
     .pipe($.sourcemaps.init())
     .pipe($.concat('vendor.js'))
     .pipe($.sourcemaps.write())
