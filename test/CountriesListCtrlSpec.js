@@ -43,10 +43,4 @@ describe("Controller: CountiresListCtrl", function(){
     expect(CountriesListController.orderBy).toBe('red');
     expect(CountriesListController.reverseOrder).toBeTruthy();
   });
-
-  it("should reroute to the specified country", function() {
-    // CountriesListController.showCountry('test');
-    // how to do this?!
-
-  });
 });
