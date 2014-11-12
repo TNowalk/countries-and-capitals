@@ -37,6 +37,10 @@ describe("Module: myApp", function(){
       };
       mockCountryInfoService.getCountry = function(country) {
         if(country === 'cheese'){
+          fakeCountry = {
+            geonames: ['cheese'],
+            number: 4
+          };
           defer.resolve(fakeCountry);
         }else{
           defer.reject();
@@ -81,9 +85,9 @@ describe("Module: myApp", function(){
 
       location.path('/countries/cheese');
       httpBackend.flush();
-
-      expect(location.current.controller).toBe('CountryCtrl');
-      expect(location.current.loadedTemplateUrl).toBe('./templates/country.html');
+      
+      expect(route.current.controller).toBe('CountryCtrl');
+      expect(route.current.loadedTemplateUrl).toBe('./templates/country.html');
     });
   });
 

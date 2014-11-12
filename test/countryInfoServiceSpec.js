@@ -51,14 +51,13 @@ describe('Service: countryInfoService', function(){
 
       var status = false;
       countryInfo.getAllCountries().then(function(countries){
-        console.log('wtf');
         status = true;
       }, function(e){
         error = e;
+      }).then(function() {
+        expect(error).not.toBeDefined();
+        expect(status).toBeTruthy();
       });
-
-      expect(error).not.toBeDefined();
-      expect(status).toBeTruthy();
     });
   });
 
