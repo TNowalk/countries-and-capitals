@@ -10,8 +10,16 @@
     vm.getNeighbours = getNeighbours;
     vm.getTimeZone = getTimeZone;
 
-    vm.getCapital(vm.country);
-    vm.getNeighbours(vm.country.countryCode);
+    vm.activate = activate;
+
+    vm.activate();
+
+    ////////////////////
+
+    function activate() {
+      getCapital(vm.country);
+      getNeighbours(vm.country.countryCode);
+    }
 
     function getCapital(country){
       countryInfoService.getCapital(country).then(

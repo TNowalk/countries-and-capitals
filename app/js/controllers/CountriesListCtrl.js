@@ -1,9 +1,9 @@
 (function(){
   angular.module('myApp').controller('CountriesListCtrl', CountriesListCtrl);
 
-  CountriesListCtrl.$inject = ['$log', 'countryInfoService', 'utilityService', 'countries'];
+  CountriesListCtrl.$inject = ['$log', 'countries'];
 
-  function CountriesListCtrl($log, countryInfoService, utilityService, countries){
+  function CountriesListCtrl($log, countries){
     var vm = this;
     vm.cols = [
       {title: 'Name', value: 'countryName'}, 
